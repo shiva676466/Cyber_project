@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureCrypt - Advanced Encryption Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-lock"></i>
+                <h1>SecureCrypt</h1>
+            </div>
+            <p class="tagline">Military-grade encryption for your sensitive data</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Algorithm Selection -->
+            <section class="algorithm-section">
+                <h2><i class="fas fa-cog"></i> Encryption Algorithm</h2>
+                <div class="algorithm-grid">
+                    <div class="algorithm-card" data-algorithm="AES-256-GCM">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>AES-256-GCM</h3>
+                        <p>Advanced Encryption Standard with Galois/Counter Mode</p>
+                        <div class="algorithm-badge">Recommended</div>
+                    </div>
+                    <div class="algorithm-card" data-algorithm="AES-256-CBC">
+                        <i class="fas fa-lock"></i>
+                        <h3>AES-256-CBC</h3>
+                        <p>Cipher Block Chaining mode with 256-bit keys</p>
+                    </div>
+                    <div class="algorithm-card" data-algorithm="ChaCha20-Poly1305">
+                        <i class="fas fa-bolt"></i>
+                        <h3>ChaCha20-Poly1305</h3>
+                        <p>High-performance stream cipher with authentication</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Password Section -->
+            <section class="password-section">
+                <h2><i class="fas fa-key"></i> Security Key</h2>
+                <div class="password-input-group">
+                    <div class="input-with-meter">
+                        <input type="password" id="password" placeholder="Enter your encryption key" autocomplete="off">
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength-meter">
+                        <div class="strength-bar"></div>
+                        <span class="strength-text">Password strength</span>
+                    </div>
+                </div>
+                <div class="password-requirements">
+                    <p><i class="fas fa-info-circle"></i> Use a strong password with at least 12 characters including uppercase, lowercase, numbers, and symbols</p>
+                </div>
+            </section>
+
+            <!-- Input/Output Section -->
+            <section class="io-section">
+                <div class="io-tabs">
+                    <button class="io-tab active" data-tab="text">Text Encryption</button>
+                    <button class="io-tab" data-tab="file">File Encryption</button>
+                </div>
+
+                <!-- Text Encryption Tab -->
+                <div class="io-content active" id="text-tab">
+                    <div class="text-area-group">
+                        <div class="text-area-container">
+                            <label for="inputText"><i class="fas fa-pencil-alt"></i> Input Text</label>
+                            <textarea id="inputText" placeholder="Enter text to encrypt or paste encrypted data to decrypt..." rows="8"></textarea>
+                            <div class="text-actions">
+                                <button id="clearInput" class="btn-secondary">
+                                    <i class="fas fa-eraser"></i> Clear
+                                </button>
+                                <button id="pasteInput" class="btn-secondary">
+                                    <i class="fas fa-paste"></i> Paste
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button id="encryptBtn" class="btn-primary">
+                                <i class="fas fa-lock"></i> Encrypt
+                            </button>
+                            <button id="decryptBtn" class="btn-primary">
+                                <i class="fas fa-unlock"></i> Decrypt
+                            </button>
+                        </div>
+
+                        <div class="text-area-container">
+                            <label for="outputText"><i class="fas fa-file-code"></i> Output</label>
+                            <textarea id="outputText" placeholder="Encrypted/decrypted text will appear here..." rows="8" readonly></textarea>
+                            <div class="text-actions">
+                                <button id="copyOutput" class="btn-secondary">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                                <button id="clearOutput" class="btn-secondary">
+                                    <i class="fas fa-eraser"></i> Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Encryption Tab -->
+                <div class="io-content" id="file-tab">
+                    <div class="file-upload-area" id="fileDropZone">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drop files here or click to browse</h3>
+                        <p>Supports any file type • Max 100MB</p>
+                        <input type="file" id="fileInput" hidden>
+                        <button class="btn-secondary" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-folder-open"></i> Browse Files
+                        </button>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo" style="display: none;">
+                        <div class="file-details">
+                            <i class="fas fa-file"></i>
+                            <div class="file-meta">
+                                <span class="file-name" id="fileName"></span>
+                                <span class="file-size" id="fileSize"></span>
+                            </div>
+                            <button class="btn-remove" id="removeFile">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="file-actions">
+                        <button id="encryptFileBtn" class="btn-primary" disabled>
+                            <i class="fas fa-lock"></i> Encrypt File
+                        </button>
+                        <button id="decryptFileBtn" class="btn-primary" disabled>
+                            <i class="fas fa-unlock"></i> Decrypt File
+                        </button>
+                    </div>
+
+                    <div class="download-area" id="downloadArea" style="display: none;">
+                        <div class="download-ready">
+                            <i class="fas fa-download"></i>
+                            <span>Your file is ready for download</span>
+                            <button id="downloadBtn" class="btn-success">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Encrypted File Viewer Section -->
+            <section class="enc-view-section">
+                <h2><i class="fas fa-file-code"></i> View .enc File Content</h2>
+                <div class="enc-view-container">
+                    <input type="file" id="encViewInput" accept=".enc" hidden>
+                    <button class="btn-primary" id="encViewBrowse">
+                        <i class="fas fa-folder-open"></i> Choose .enc File
+                    </button>
+                    <textarea id="encViewText" placeholder="Encrypted content will appear here..." rows="18" style="min-height:300px; width:100%; font-size:14px;" readonly></textarea>
+
+                    <button class="btn-secondary" id="encViewDecryptBtn" style="margin-top:12px;">
+                        <i class="fas fa-unlock"></i> Decrypt &amp; Preview (uses password above)
+                    </button>
+                    <textarea id="encViewDecryptedText" placeholder="Decrypted preview will appear here (for text-based files)..." rows="10" style="min-height:200px; width:100%; font-size:14px; margin-top:8px;" readonly></textarea>
+                </div>
+            </section>
+
+            <!-- Security Information -->
+            <section class="security-info">
+                <h2><i class="fas fa-shield-alt"></i> Security Information</h2>
+                <div class="security-grid">
+                    <div class="security-item">
+                        <i class="fas fa-user-secret"></i>
+                        <h3>Zero Knowledge</h3>
+                        <p>All encryption happens locally in your browser. We never see your data or keys.</p>
+                    </div>
+                    <div class="security-item">
+                        <i class="fas fa-fingerprint"></i>
+                        <h3>Strong Algorithms</h3>
+                        <p>Uses industry-standard AES-256 and ChaCha20 with proper key derivation.</p>
+                    </div>
+                    <div class="security-item">
+                        <i class="fas fa-clock"></i>
+                        <h3>Forward Secrecy</h3>
+                        <p>Each encryption uses unique salts and initialization vectors for maximum security.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 SecureCrypt. All encryption performed locally in your browser.</p>
+            <div class="footer-links">
+                <a href="#" id="privacyLink">Privacy</a>
+                <a href="#" id="securityLink">Security</a>
+                <a href="#" id="aboutLink">About</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-lock"></i>
+            <p>Processing your data securely...</p>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Information</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
