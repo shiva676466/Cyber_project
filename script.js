@@ -238,7 +238,7 @@ class SecureCrypt {
                     throw new Error('Unsupported algorithm');
             }
 
-            document.getElementById('outputText').value = JSON.stringify(encrypted, null, 2);
+            document.getElementById('outputText').value = `${encrypted.salt}.${encrypted.iv}.${encrypted.ciphertext}`;
             this.showSuccess('Text encrypted successfully!');
         } catch (error) {
             this.showError(`Encryption failed: ${error.message}`);
@@ -266,12 +266,16 @@ class SecureCrypt {
         try {
             let encryptedData;
             
-            // Try to parse as JSON
-            try {
-                encryptedData = JSON.parse(input);
-            } catch (e) {
-                throw new Error('Invalid encrypted data format. Please ensure you are using the correct encrypted data.');
+            // New compact format: salt.iv.ciphertext
+            const parts = input.split('.');
+            if (parts.length < 3) {
+                throw new Error('Invalid encrypted data format');
             }
+            encryptedData = {
+                salt: parts[0],
+                iv: parts[1],
+                ciphertext: parts.slice(2).join('.')
+            };
 
             let decrypted;
 
