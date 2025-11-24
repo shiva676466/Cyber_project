@@ -19,6 +19,26 @@
             <p class="tagline">Military-grade encryption for your sensitive data</p>
         </header>
 
+<section class="hero-intro">
+    <div class="hero-content">
+        <h2 class="hero-title">Cyber‑Grade Encryption</h2>
+        <p class="hero-subtitle">Experience a futuristic security interface powered by AES‑256 & ChaCha20</p>
+        <p class="hero-typing">
+            <span id="typingText"></span>
+            <span class="cursor">|</span>
+        </p>
+      <div class="hero-buttons">
+    <button class="btn-primary" id="startEncryptionBtn">
+        <i class="fas fa-terminal"></i> Start Encryption
+    </button>
+
+    <button class="btn-secondary" id="tutorialBtn">
+        <i class="fas fa-graduation-cap"></i> Tutorial
+    </button>
+</div>
+    </div>
+</section>
+
         <!-- Main Content -->
         <main class="main-content">
             <!-- Algorithm Selection -->
@@ -224,8 +244,17 @@
                 <button class="modal-close" id="modalClose">&times;</button>
             </div>
             <div class="modal-body" id="modalBody">
-                <!-- Modal content will be inserted here -->
-            </div>
+    <h3>How to Use SecureCrypt</h3>
+    <ol class="tutorial-steps">
+        <li>Select your encryption algorithm (AES-256 or ChaCha20)</li>
+        <li>Enter a strong password in the Security Key section</li>
+        <li>Choose whether to encrypt Text or a File</li>
+        <li>Click Encrypt / Decrypt buttons depending on your need</li>
+        <li>Copy your encrypted message or download the encrypted file</li>
+        <li>To view .enc file content, use the Encrypted File Viewer below</li>
+    </ol>
+    <p class="tutorial-note"><i class="fas fa-shield-alt"></i> All encryption happens locally in your browser — no data ever leaves your device.</p>
+</div>
         </div>
     </div>
 

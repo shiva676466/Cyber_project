@@ -881,3 +881,8 @@ if (encViewBrowse && encViewInput && encViewText) {
 document.addEventListener('DOMContentLoaded', () => {
     new SecureCrypt();
 });
+// Tutorial Button
+document.getElementById("tutorialBtn").addEventListener("click", () => {
+    document.getElementById("modalTitle").innerText = "SecureCrypt Tutorial";
+    document.getElementById("infoModal").style.display = "flex";
+});
